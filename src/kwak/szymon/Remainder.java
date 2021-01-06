@@ -17,5 +17,11 @@ public class Remainder extends JFrame {
 
     }
 
+    void showRemainder(){}
+
+    void hideRemainder(){}
+
+    void postPoneRemainder(){}
+
 
 }

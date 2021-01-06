@@ -45,6 +45,8 @@ public class Main {
 
     public static void main(String[] args) {
 
+        TrayMenu trayMenu = new TrayMenu();
+
         getSystemLookAndFeel();
         Remainder remainder = new Remainder(getScreenWidth(), getScreenHeight());
         showRemainder(remainder);
