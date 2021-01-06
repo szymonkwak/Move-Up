@@ -1,12 +1,12 @@
 package kwak.szymon;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-
-        //Pobierz wygląd okienek z systemu
+    //Pobierz wygląd okienek z systemu
+    static void getSystemLookAndFeel() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (ClassNotFoundException e) {
@@ -18,13 +18,38 @@ public class Main {
         } catch (UnsupportedLookAndFeelException e) {
             e.printStackTrace();
         }
+    }
 
+    //Ustal rozdzielczość ekranu
+    static int getScreenHeight() {
+        return Toolkit.getDefaultToolkit().getScreenSize().height;
+    }
+    static int getScreenWidth() {
+        return Toolkit.getDefaultToolkit().getScreenSize().width;
+    }
+
+    //Pokaż remainder
+    static void showRemainder(Remainder remainder) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                Remainder remainder = new Remainder(800,500);
                 remainder.setVisible(true);
+                //Wyzeruj i wystartuj progress bar
             }
         });
+    }
+
+    static void hideRemainder(Remainder remainder){
+        remainder.setVisible(false);
+    }
+
+    public static void main(String[] args) {
+
+        getSystemLookAndFeel();
+        Remainder remainder = new Remainder(getScreenWidth(), getScreenHeight());
+        showRemainder(remainder);
+        hideRemainder(remainder);
+
+
     }
 }
