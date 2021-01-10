@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.net.URL;
 
 public class TrayMenu {
@@ -18,11 +20,40 @@ public class TrayMenu {
         if (!SystemTray.isSupported()) {
             System.exit(0);
         }
-        trayIcon = new TrayIcon(createIcon("/kwak/szymon/AppIcon.ico"));
+        trayIcon = new TrayIcon(createIcon("/kwak/szymon/AppIcon.png"));
         final SystemTray tray = SystemTray.getSystemTray();
 
         //Dodanie menu PPM do ikony w trayu
         trayIcon.setPopupMenu(createTrayPopUpMenu());
+        trayIcon.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent mouseEvent) {
+                //TODO teoretycznie działa, ale trzeba klikać na ikonkę
+                trayIcon.setToolTip("Do kolejnej przerwy " + (Main.REMAINDER_INTERVAL - Main.actualMilisec) / 60000 + " min");
+            }
+
+            @Override
+            public void mousePressed(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent mouseEvent) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent mouseEvent) {
+                //TODO dlaczego tutaj nie działa?
+                trayIcon.setToolTip("test");
+
+            }
+
+            @Override
+            public void mouseExited(MouseEvent mouseEvent) {
+
+            }
+        });
 
         try {
             tray.add(trayIcon);
@@ -54,7 +85,15 @@ public class TrayMenu {
             }
         });
 
+        postpone.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent actionEvent) {
+//                TODO zresetuj przerwy
+            }
+        });
+
         return popupMenu;
     }
+
 
 }

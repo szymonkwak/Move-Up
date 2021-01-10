@@ -4,24 +4,26 @@ import javax.swing.*;
 
 public class Remainder extends JFrame {
 
-    private JProgressBar progressBarTime;
+    JProgressBar progressBarTime;
     private JPanel RemainderPanel;
-    private JButton btnPostpone;
 
     public Remainder(int width, int height) {
         add(RemainderPanel);
-        setSize(width - 150, height - 150);
+        setSize(width, height);
         setAlwaysOnTop(true);
         setLocationRelativeTo(null); //Wyśrodkowanie form na środku ekranu
         setUndecorated(true); //Ukrywanie Title Bar'a
 
     }
 
-    void showRemainder(){}
+    void showRemainder() {
+    }
 
-    void hideRemainder(){}
+    void hideRemainder() {
+    }
 
-    void postPoneRemainder(){}
+    void postPoneRemainder() {
+    }
 
 
 }
