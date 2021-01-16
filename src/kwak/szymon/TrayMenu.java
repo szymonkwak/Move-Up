@@ -29,7 +29,7 @@ public class TrayMenu {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
                 //TODO teoretycznie działa, ale trzeba klikać na ikonkę
-                trayIcon.setToolTip("Do kolejnej przerwy " + (Main.REMAINDER_INTERVAL - Main.actualMilisec) / 60000 + " min");
+                trayIcon.setToolTip("Do kolejnej przerwy " + ((Main.REMAINDER_INTERVAL_MIN / 60_000) - Main.getActualMin()) + " min");
             }
 
             @Override
@@ -88,7 +88,7 @@ public class TrayMenu {
         postpone.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-//                TODO zresetuj przerwy
+                Main.setActualMin(Main.REMAINDER_INTERVAL_MIN - 5);
             }
         });
 
