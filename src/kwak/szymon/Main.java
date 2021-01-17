@@ -1,6 +1,7 @@
 package kwak.szymon;
 
 import com.formdev.flatlaf.FlatDarkLaf;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,7 +16,7 @@ public class Main {
     static ActionListener listener1, listener2;
 
     static final int REMAINDER_INTERVAL_MIN = 60; //60 bo 1 Godzina = 3600_000 / 60_000
-    static final int TIMER_DELAY = 1_000; //60_000 bo aktualizuję czas co 1min
+    static final int TIMER_DELAY = 60_000; //60_000 bo aktualizuję czas co 1min
     static final int BREAK_DURATION_SEC = 60;
 
     public static void main(String[] args) {
@@ -23,10 +24,6 @@ public class Main {
         setLookAndFeelFlatFight();
         trayMenu = new TrayMenu();
         remainder1 = new Remainder(getScreenWidth() - 150, getScreenHeight() - 150);
-
-
-        //remainder1.progressBarTime.setValue(2000);
-        //showRemainder(remainder1);
 
         startOneHourTimer();
     }
@@ -58,21 +55,21 @@ public class Main {
         return actualMilisec / 60_000;
     }
 
-    static void showRemainder(Remainder remainder) {
+    static void showRemainder() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                startProgressBar(remainder.progressBarTime);
-                remainder.setVisible(true);
+                startProgressBar(remainder1.progressBarTime);
+                remainder1.setVisible(true);
             }
         });
     }
 
-    static void hideRemainder(Remainder remainder) {
+    static void hideRemainder() {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                remainder.setVisible(false);
+                remainder1.setVisible(false);
             }
         });
     }
@@ -83,8 +80,10 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 actualMilisec = actualMilisec + TIMER_DELAY;
-                if (actualMilisec >= REMAINDER_INTERVAL_MIN) {
-                    showRemainder(remainder1);
+                System.out.println(actualMilisec);
+                if (actualMilisec >= (REMAINDER_INTERVAL_MIN * 60_000)) {
+                    remainder1.downloadAndSetImage();
+                    showRemainder();
                 }
             }
         };
@@ -99,7 +98,7 @@ public class Main {
             public void actionPerformed(ActionEvent actionEvent) {
                 progressBar.setValue(progressBar.getValue() - 1);
                 if (progressBar.getValue() < 1) {
-                    hideRemainder(remainder1);
+                    hideRemainder();
                     actualMilisec = 0;
                     startOneHourTimer();
                     timer2.stop();
