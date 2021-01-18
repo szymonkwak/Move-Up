@@ -3,12 +3,10 @@ package kwak.szymon;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
@@ -35,8 +33,10 @@ public class Remainder extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                Main.setActualMin(55);
                 Main.hideRemainder();
+                Main.timer2.stop();
+                Main.setActualMin(55);
+                Main.startOneHourTimer();
             }
         });
     }
@@ -61,6 +61,7 @@ public class Remainder extends JFrame {
                     LabelImage.setIcon(imageIcon);
                 } catch (IOException e) {
                     e.printStackTrace();
+                    //TODO dodać defaultowy gif
                     imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("AppIcon.png")).getImage().getScaledInstance(-1, 400, Image.SCALE_SMOOTH));
                     LabelImage.setIcon(imageIcon);
                 }

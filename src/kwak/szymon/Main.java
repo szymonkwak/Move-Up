@@ -48,7 +48,7 @@ public class Main {
     }
 
     public static void setActualMin(int actualMin) {
-        Main.actualMilisec = actualMin * 60 * 1000;
+        Main.actualMilisec = actualMin * 60_000;
     }
 
     public static int getActualMin() {
@@ -99,9 +99,10 @@ public class Main {
                 progressBar.setValue(progressBar.getValue() - 1);
                 if (progressBar.getValue() < 1) {
                     hideRemainder();
+                    timer2.stop();
+                    timer1.stop();
                     actualMilisec = 0;
                     startOneHourTimer();
-                    timer2.stop();
                 }
 
             }

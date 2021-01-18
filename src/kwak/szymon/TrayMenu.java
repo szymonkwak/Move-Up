@@ -34,24 +34,20 @@ public class TrayMenu {
 
             @Override
             public void mousePressed(MouseEvent mouseEvent) {
-
             }
 
             @Override
             public void mouseReleased(MouseEvent mouseEvent) {
-
             }
 
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
                 //TODO dlaczego tutaj nie działa?
                 trayIcon.setToolTip("test");
-
             }
 
             @Override
             public void mouseExited(MouseEvent mouseEvent) {
-
             }
         });
 
@@ -81,15 +77,16 @@ public class TrayMenu {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 System.exit(0);
-
             }
         });
 
         postpone.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
-                Main.setActualMin(0);
                 Main.hideRemainder();
+                Main.timer1.stop();
+                Main.setActualMin(0);
+                Main.startOneHourTimer();
             }
         });
 
