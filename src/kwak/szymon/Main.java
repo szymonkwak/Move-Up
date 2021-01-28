@@ -12,7 +12,7 @@ public class Main {
     private static int actualMilisec;
     static Remainder remainder1;
     static TrayMenu trayMenu;
-    static Timer timer1, timer2;
+    static Timer timerOneHour, timerProgressBar;
     static ActionListener listener1, listener2;
 
     static final int REMAINDER_INTERVAL_MIN = 60; //60 bo 1 Godzina = 3600_000 / 60_000
@@ -24,6 +24,7 @@ public class Main {
         setLookAndFeelFlatFight();
         trayMenu = new TrayMenu();
         remainder1 = new Remainder(getScreenWidth() - 150, getScreenHeight() - 150);
+        timerProgressBar = new Timer(0,null); //Potrzebuję zainicjalizować oba timery, żeby nie dostać nullPointerException jeżeli zatrzymam je zanim by wystartowały
 
         startOneHourTimer();
     }
@@ -80,15 +81,15 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 actualMilisec = actualMilisec + TIMER_DELAY;
-                System.out.println(actualMilisec);
+                // System.out.println("oneHourTimer " + getActualMin());
                 if (actualMilisec >= (REMAINDER_INTERVAL_MIN * 60_000)) {
                     remainder1.downloadAndSetImage();
                     showRemainder();
                 }
             }
         };
-        timer1 = new Timer(TIMER_DELAY, listener1);
-        timer1.start();
+        timerOneHour = new Timer(TIMER_DELAY,listener1);
+        timerOneHour.start();
     }
 
     static void startProgressBar(JProgressBar progressBar) {
@@ -97,18 +98,19 @@ public class Main {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 progressBar.setValue(progressBar.getValue() - 1);
+                // System.out.println("progressBar " + progressBar.getValue());
                 if (progressBar.getValue() < 1) {
                     hideRemainder();
-                    timer2.stop();
-                    timer1.stop();
+                    timerProgressBar.stop();
+                    timerOneHour.stop();
                     actualMilisec = 0;
                     startOneHourTimer();
                 }
 
             }
         };
-        timer2 = new Timer(25, listener2);
-        timer2.start();
+        timerProgressBar = new Timer(25,listener2);
+        timerProgressBar.start();
     }
 
 

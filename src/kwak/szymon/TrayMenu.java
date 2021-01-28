@@ -84,7 +84,8 @@ public class TrayMenu {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 Main.hideRemainder();
-                Main.timer1.stop();
+                Main.timerProgressBar.stop();
+                Main.timerOneHour.stop();
                 Main.setActualMin(0);
                 Main.startOneHourTimer();
             }

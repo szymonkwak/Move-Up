@@ -23,6 +23,7 @@ public class Remainder extends JFrame {
         downloadAndSetImage();
         add(RemainderPanel);
         setSize(width, height);
+        LabelMoment.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         setAlwaysOnTop(true);
         setLocationRelativeTo(null); //Wyśrodkowanie form na środku ekranu
         setUndecorated(true); //Ukrywanie Title Bar'a
@@ -32,9 +33,10 @@ public class Remainder extends JFrame {
         LabelMoment.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
+             // super.mouseClicked(e);
                 Main.hideRemainder();
-                Main.timer2.stop();
+                Main.timerProgressBar.stop();
+                Main.timerOneHour.stop();
                 Main.setActualMin(55);
                 Main.startOneHourTimer();
             }
