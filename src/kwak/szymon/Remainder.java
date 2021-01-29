@@ -61,10 +61,9 @@ public class Remainder extends JFrame {
 
                     imageIcon = new ImageIcon(giphUrl);
                     LabelImage.setIcon(imageIcon);
+
                 } catch (IOException e) {
-                    e.printStackTrace();
-                    //TODO dodać defaultowy gif
-                    imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("AppIcon.png")).getImage().getScaledInstance(-1, 400, Image.SCALE_SMOOTH));
+                    imageIcon = new ImageIcon(new ImageIcon(getClass().getResource("default-gif.gif")).getImage());
                     LabelImage.setIcon(imageIcon);
                 }
             }

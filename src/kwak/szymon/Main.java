@@ -103,7 +103,7 @@ public class Main {
                     hideRemainder();
                     timerProgressBar.stop();
                     timerOneHour.stop();
-                    actualMilisec = 0;
+                    setActualMin(0);
                     startOneHourTimer();
                 }
 

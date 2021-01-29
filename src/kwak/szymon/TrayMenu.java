@@ -22,13 +22,13 @@ public class TrayMenu {
         }
         trayIcon = new TrayIcon(createIcon("/kwak/szymon/AppIcon.png"));
         final SystemTray tray = SystemTray.getSystemTray();
+        trayIcon.setImageAutoSize(true);
 
         //Dodanie menu PPM do ikony w trayu
         trayIcon.setPopupMenu(createTrayPopUpMenu());
         trayIcon.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent mouseEvent) {
-                //TODO teoretycznie działa, ale trzeba klikać na ikonkę
                 trayIcon.setToolTip("Do kolejnej przerwy " + (Main.REMAINDER_INTERVAL_MIN - Main.getActualMin()) + " min");
             }
 
@@ -42,8 +42,8 @@ public class TrayMenu {
 
             @Override
             public void mouseEntered(MouseEvent mouseEvent) {
-                //TODO dlaczego tutaj nie działa?
-                trayIcon.setToolTip("test");
+                // Nie jest wspierane
+                //https://docs.oracle.com/javase/7/docs/api/java/awt/TrayIcon.html#addMouseListener%28java.awt.event.MouseListener%29
             }
 
             @Override
