@@ -94,6 +94,8 @@ public class Main {
 
     static void startProgressBar(JProgressBar progressBar) {
         progressBar.setValue(BREAK_DURATION_SEC * 40);
+        timerOneHour.stop();
+        setActualMin(0);
         listener2 = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
@@ -102,8 +104,6 @@ public class Main {
                 if (progressBar.getValue() < 1) {
                     hideRemainder();
                     timerProgressBar.stop();
-                    timerOneHour.stop();
-                    setActualMin(0);
                     startOneHourTimer();
                 }
 
